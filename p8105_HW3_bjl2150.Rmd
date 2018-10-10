@@ -21,9 +21,18 @@ library(p8105.datasets)
 
 data(brfss_smart2010)
   
-brfss_smart2010 = brfss_smart2010 %>% 
+brfss = brfss_smart2010 %>% 
   janitor::clean_names() %>%
   filter(topic == "Overall Health")
+
+# Checked the unique observations within 'response' columns
+unique(brfss$response)
+
+brfss %>%
+  mutate(response_levels = forcats::fct_relevel(response, c("Excellent", "Very Good", "Good", 
+                                                     "Fair", "Poor")))  
+
+
 ```
 
 
