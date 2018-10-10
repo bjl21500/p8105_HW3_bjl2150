@@ -1,0 +1,8 @@
+---
+title: "p8105_HW3_bjl2150"
+author: "Briana Lettsome"
+date: "October 10, 2018"
+output: github_document
+---
+
+
