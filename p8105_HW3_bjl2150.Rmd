@@ -32,7 +32,26 @@ brfss %>%
   mutate(response_levels = forcats::fct_relevel(response, c("Excellent", "Very Good", "Good", 
                                                      "Fair", "Poor")))  
 
+brfss_2002 = brfss %>%
+  filter(year == 2002) %>%
+  separate(locationdesc, into = c("state", "county"), sep = "-") %>%
+  group_by(state) %>%
+  distinct(county) %>%
+  count() %>%
+  filter(n == 7)
+  
+  
+  
+ 
 
+
+```
+
+```{r}
+unique(brfss_smart2010$Year)
+
+bsfss_spaghetti = brfss
+  
 ```
 
 
