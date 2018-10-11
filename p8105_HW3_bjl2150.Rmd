@@ -45,16 +45,16 @@ brfss_2002 = brfss %>%
 Coneecticut, Florida and North Carolina are the states which were observed at 
 7 locations  
   
-  
- 
-
-
-```
-
+## Making Spaghetti Plot
 ```{r}
 unique(brfss_smart2010$Year)
 
-bsfss_spaghetti = brfss
+brfss_spaghetti = brfss %>%
+  group_by(locationabbr, year) %>%
+  distinct(locationdesc) %>%
+  summarize(location_number = n())
+  
+
   
 ```
 
