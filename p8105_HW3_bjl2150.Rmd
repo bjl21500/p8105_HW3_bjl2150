@@ -29,8 +29,9 @@ brfss = brfss_smart2010 %>%
 unique(brfss$response)
 
 brfss %>%
-  mutate(response_levels = forcats::fct_relevel(response, c("Excellent", "Very Good", "Good", 
-                                                     "Fair", "Poor")))  
+  mutate(response_levels = forcats::fct_relevel(response, c("Excellent", 
+                                                            "Very Good", "Good",
+                                                            "Fair", "Poor")))  
 
 brfss_2002 = brfss %>%
   filter(year == 2002) %>%
@@ -39,7 +40,10 @@ brfss_2002 = brfss %>%
   distinct(county) %>%
   count() %>%
   filter(n == 7)
-  
+```
+
+Coneecticut, Florida and North Carolina are the states which were observed at 
+7 locations  
   
   
  
