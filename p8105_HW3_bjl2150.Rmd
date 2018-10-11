@@ -57,9 +57,11 @@ brfss_spaghetti = brfss %>%
   summarize(location_numbers = n()) %>%
   ggplot(aes(x = year, y = location_numbers, color = locationabbr)) + 
   geom_line()
-  
+```
 
-  
+```{r}
+
+
 ```
 
 
