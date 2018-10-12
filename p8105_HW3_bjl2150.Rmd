@@ -117,6 +117,15 @@ product name and what aisle and department said product can be found in.
 
 This dataset has 15 columns and 1,384,617 rows.
 
+```{r}
+# Answering how many aisles there are
+instacart_2 = instacart %>%
+  select(aisle) %>%
+  distinct() %>%
+  count()
+```
+
+There are 134 aisles in the instacart dataset.
 
 
 
