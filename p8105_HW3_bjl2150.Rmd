@@ -6,6 +6,7 @@ output: github_document
 ---
 
 ```{r}
+# Loading of tidyverse package
 library(tidyverse)
 ```
 
@@ -59,6 +60,7 @@ brfss_spaghetti = brfss %>%
   geom_line()
 ```
 
+### Question 3
 ```{r}
 brfss_table = brfss %>%
   group_by(locationdesc) %>%
@@ -66,11 +68,13 @@ brfss_table = brfss %>%
   spread(key = response, value = data_value) %>%
   select("Excellent", year) 
 
+# The correct code chunk below
 brfss_table_2 = brfss %>%
     filter(locationabbr == "NY", response == "Excellent") %>%
   spread(key = response, value = data_value) %>%
   filter(year %in% c("2002", "2006", "2010")) 
 
+# Making of the table to show means and standard deveiations
 brfss_table_2 %>%
   group_by(year) %>%
   summarize(mean_excellent = mean(Excellent),
