@@ -60,6 +60,19 @@ brfss_spaghetti = brfss %>%
 ```
 
 ```{r}
+brfss_table = brfss %>%
+  group_by(locationdesc) %>%
+  filter(locationabbr == "NY", year %in% c("2002", "2006", "2010")) %>%
+  spread(key = response, value = data_value) %>%
+  select("Excellent", year) 
+
+brfss_table_2 = brfss %>%
+    filter(locationabbr == "NY", response == "Excellent") %>%
+  spread(key = response, value = data_value) %>%
+  filter(year %in% c("2002", "2006", "2010"))
+  
+ 
+
 
 
 ```
