@@ -69,12 +69,14 @@ brfss_table = brfss %>%
 brfss_table_2 = brfss %>%
     filter(locationabbr == "NY", response == "Excellent") %>%
   spread(key = response, value = data_value) %>%
-  filter(year %in% c("2002", "2006", "2010"))
-  
+  filter(year %in% c("2002", "2006", "2010")) 
+
+brfss_table_2 %>%
+  group_by(year) %>%
+  summarize(mean_excellent = mean(Excellent),
+            sd_excellent = sd(Excellent)) %>%
+   knitr::kable(digits = 1)
  
-
-
-
 ```
 
 
