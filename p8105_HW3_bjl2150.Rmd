@@ -130,6 +130,7 @@ instacart_1B = instacart %>%
   group_by(aisle) %>%
   count()
 
+
 ```
 
 There are 134 aisles in the instacart dataset.
