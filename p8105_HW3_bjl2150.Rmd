@@ -29,11 +29,14 @@ brfss = brfss_smart2010 %>%
 # Checked the unique observations within 'response' columns
 unique(brfss$response)
 
+# Ordering of the responses from "Excellent"" to "Poor"
 brfss %>%
   mutate(response_levels = forcats::fct_relevel(response, c("Excellent", 
                                                             "Very Good", "Good",
-                                                            "Fair", "Poor")))  
+                                                            "Fair", "Poor"))) 
 
+
+#Wrangling dataframe to find the which states were observed at 7 locations
 brfss_2002 = brfss %>%
   filter(year == 2002) %>%
   separate(locationdesc, into = c("state", "county"), sep = "-") %>%
@@ -46,7 +49,7 @@ brfss_2002 = brfss %>%
 Coneecticut, Florida and North Carolina are the states which were observed at 
 7 locations  
   
-## Making Spaghetti Plot
+## Question 2: Making of Spaghetti Plot
 ```{r}
 library(ggridges)
 
@@ -60,7 +63,7 @@ brfss_spaghetti = brfss %>%
   geom_line()
 ```
 
-### Question 3
+### Question 3: Making of Table
 ```{r}
 brfss_table = brfss %>%
   group_by(locationdesc) %>%
@@ -80,9 +83,13 @@ brfss_table_2 %>%
   summarize(mean_excellent = mean(Excellent),
             sd_excellent = sd(Excellent)) %>%
    knitr::kable(digits = 1)
- 
 ```
 
+### Question 4
+
+```{r}
+
+```
 
 
 # Problem 2
