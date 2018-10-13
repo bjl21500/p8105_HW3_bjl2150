@@ -132,6 +132,11 @@ instacart_1B = instacart %>%
   count(aisle) %>% 
   arrange(desc(n))
 
+# Problem 2 - Making of plot
+
+# Problem 3 - Making table of most popular items
+
+
 ```
 
 There are 134 aisles in the instacart dataset.
