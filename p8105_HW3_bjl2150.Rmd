@@ -138,22 +138,27 @@ instacart_1B = instacart %>%
 
 
 
- 
   
 # 2.4
-  
+
   instacart_4 = instacart %>%
     select(order_hour_of_day, product_name, order_dow) %>%
     filter(product_name %in% c("Pink Lady Apples", "Coffee Ice Cream")) %>%
-    group_by(order_dow) %>%
-    summarize(mean_hour = mean(order_hour_of_day, na.rm = TRUE))
+    group_by(order_dow, product_name) %>%
+    summarize(mean_hour = mean(order_hour_of_day, na.rm = TRUE)) %>%
+  spread(key = order_dow, value = mean_hour) %>%
+  knitr::kable(digits = 1)
+
+
+
+  
   
 
 
 
 
 ```
-
+`r instacart_4`
 There are 134 aisles in the instacart dataset.
 
 The aisle with withthe most items ordered are fresh vegetables, fresh fruits, and
