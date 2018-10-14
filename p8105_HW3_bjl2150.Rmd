@@ -136,14 +136,20 @@ instacart_1B = instacart %>%
 
 # Problem 3 - Making table of most popular items
 
-instacart_3 = instacart %>%
-  group_by(aisle, product_name) %>% 
-  filter(aisle %in% c("baking ingredients", "dog food care", 
-                      "packaged vegetables fruits")) %>%
-  summarize(popular_items = n())%>%
-  arrange(desc(popular_items))
+
+
+ 
   
+# 2.4
   
+  instacart_4 = instacart %>%
+    select(order_hour_of_day, product_name, order_dow) %>%
+    filter(product_name %in% c("Pink Lady Apples", "Coffee Ice Cream")) %>%
+    group_by(order_dow) %>%
+    summarize(mean_hour = mean(order_hour_of_day, na.rm = TRUE))
+  
+
+
 
 
 ```
