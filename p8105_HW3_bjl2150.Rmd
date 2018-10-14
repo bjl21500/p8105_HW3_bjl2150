@@ -137,22 +137,23 @@ instacart_1B = instacart %>%
 # Problem 3 - Making table of most popular items
 
 
+  
 
   
 # Problem 4 - Making table of mean hour of day for Pink Lady and Coffee Ice Cream
 
-  instacart_4 = instacart %>%
+instacart_4 = instacart %>%
     select(order_hour_of_day, product_name, order_dow) %>%
     filter(product_name %in% c("Pink Lady Apples", "Coffee Ice Cream")) %>%
     group_by(order_dow, product_name) %>%
     summarize(mean_hour = mean(order_hour_of_day, na.rm = TRUE)) %>%
-  spread(key = order_dow, value = mean_hour) %>%
-  knitr::kable(digits = 1)
+    spread(key = order_dow, value = mean_hour) %>% 
+    knitr::kable(digits = 1)
 ```
 
 There are 134 aisles in the instacart dataset.
 
-The aisle with withthe most items ordered are fresh vegetables, fresh fruits, and
+The aisle with the most items ordered are fresh vegetables, fresh fruits, and
 packages vegetables fruits.
 
 A table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice 
@@ -160,3 +161,19 @@ Cream are ordered each day:
 `r instacart_4`
 
 # Problem 3
+```{r}
+devtools::install_github("p8105/p8105.datasets")
+
+library(p8105.datasets)
+
+data(ny_noaa)
+
+ny_noaa = ny_noaa
+```
+This dataset is provided by the National Oceanic and Atmosperic Administration. 
+This particular set includes information from the various weather stations 
+throughout NY state. Some of the the variables included within this dataset are 
+weather station ID, precipiation (mm), snow depth (mm), and minimum and maximum 
+temperatures. One of the primary issues with this dataset is the large amount of
+missing data. Thus, it is difficlt to obtain an accurate measure of the variables,
+such as precipiation or snowfall (mm), from the various weather stations.
