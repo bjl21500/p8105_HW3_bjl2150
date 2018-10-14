@@ -184,6 +184,6 @@ such as precipiation or snowfall (mm), from the various weather stations.
 ```{r}
 ny_noaa_1 = ny_noaa %>%
   janitor::clean_names() %>%
-  separate(date, into = c("year", "month", "day"), sep = "_")
+  separate(date, into = c("year", "month", "day"), sep = "-")
 ```
 
