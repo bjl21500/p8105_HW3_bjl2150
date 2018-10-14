@@ -139,7 +139,7 @@ instacart_1B = instacart %>%
 
 
   
-# 2.4
+# Problem 4 - Making table of mean hour of day for Pink Lady and Coffee Ice Cream
 
   instacart_4 = instacart %>%
     select(order_hour_of_day, product_name, order_dow) %>%
@@ -148,22 +148,15 @@ instacart_1B = instacart %>%
     summarize(mean_hour = mean(order_hour_of_day, na.rm = TRUE)) %>%
   spread(key = order_dow, value = mean_hour) %>%
   knitr::kable(digits = 1)
-
-
-
-  
-  
-
-
-
-
 ```
-`r instacart_4`
+
 There are 134 aisles in the instacart dataset.
 
 The aisle with withthe most items ordered are fresh vegetables, fresh fruits, and
 packages vegetables fruits.
 
-
+A table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice 
+Cream are ordered each day:
+`r instacart_4`
 
 # Problem 3
