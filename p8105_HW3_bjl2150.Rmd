@@ -162,11 +162,14 @@ data was then cleaned using the janitor function.
 
 ### Short Description of dataset
 
-This dataset is from the delivery service Instacart. It shows observations ranging
-from proudct ID number and the hour of the day that a product was ordered to the 
-product name and what aisle and department said product can be found in.
-
-Using the dim function, this dataset has 15 columns and 1,384,617 rows.
+This dataset is from the delivery service Instacart. It shows key observations 
+ranging from proudct ID number and the hour of the day that a product was
+ordered to the product name and what aisle and department said product can be 
+found in. Using the 'dim' function, this dataset has 15 columns and 1,384,617 rows.
+This dataset is structured in such a way that would be unfamilar to the general
+public. For instance, the variable 'order_dow" is very unclear and would need to 
+be modified so that readers are aware that it refers to the order day of the week.
+In whole, this dataset would need to be restructured to that it is easy to read.
 
 
 ## Question 2.1
@@ -185,7 +188,7 @@ instacart_1B = instacart %>%
   count(aisle) %>% 
   arrange(desc(n))
 ```
-In the first part of Question 1, the number of ailses was determined by selecting
+In the first part of Question 1, the number of aisles was determined by selecting
 the aisle column specifically, and then using the distinct function to determine 
 the distinct aisles present in the dataset. The count function was then used to 
 get a number of distinct aisles present in the dataset.
@@ -196,20 +199,22 @@ order to get how many products are ordered per aisle. Then the arranged fucntion
 was utilized to get which aisles had the largest amount of products order from 
 them in descending order.
 
-## Problem 2 - Making of plot
+## Problem 2.2 - Making of plot
 ```{r}
+instacart_2 = instacart %>%
+  select(aisle, product_name) %>%
+  count(aisle)
 
 ```
 
-## Problem 3 - Making table of most popular items
+## Problem 2.3 - Making table of most popular items
 
 ```{r}
-
+# Structured the code to obain the correct output
 instacart_3B = instacart %>%
   select(aisle, product_name) %>% 
   group_by(aisle) %>%
   count(product_name) %>%
-  
   filter(aisle %in% c("baking ingredients", "dog food care", 
                       "packaged vegetables fruits")) %>% 
   arrange(desc(n), .by_group = TRUE ) %>%
@@ -217,16 +222,23 @@ instacart_3B = instacart %>%
                              "Organic Baby Spinach")) %>%
     knitr::kable(digits = 1)
  
-# Called the dataset to be in the golabl environment
+# Called the dataset to be into the global environment
 instacart_3B
 ```
 
+To answer Question 2.3, a new dataset, named instacart_3B, was created from the 
+original instacart dataset. The select function was used to specifically select
+the columns aisle and product_name. The dataset was then grouped by aisle and 
+the observations under the product_name counted.The three specific aisles were 
+filtered out :'baking ingredients', 'dog food care', and 
+'packaged vegetables fruits'. The dataset was arranged in descending orer by n 
+and by group. The most popular items per aisle were then filtered out and a table
+was created.
   
 
-  
 ## Problem 4 - Making table of mean hour of day for Pink Lady Apples and Coffee Ice Cream
 ```{r}
-
+# Manipulating of the dataset to be able to make the table
 instacart_4 = instacart %>%
     select(order_hour_of_day, product_name, order_dow) %>%
     filter(product_name %in% c("Pink Lady Apples", "Coffee Ice Cream")) %>%
@@ -240,7 +252,7 @@ ordered, the select funtion was used to specifically select columns
 "order_hour_of_day", "product_name", and "order_dow". The filter function was 
 then used to specify the observations for Pink Lady Apples and Coffee Ice Cream.
 The dataset was then grouped by "order_dow" and "product_name" and then the 
-"mean_hour" caluclated by takin he mean of "order_hout_of_day", while removing 
+"mean_hour" caluclated by takin the mean of "order_hout_of_day", while removing 
 missing variables. The spread function was used to spread the "order_dow" from 
 one column to multiple columns to reflect the days of the week. The value for 
 this column was the previously calculated mean_hour values. knits::kable was
@@ -251,7 +263,7 @@ then used to create a table out of this dataset.
 * There are 134 aisles in the instacart dataset.
 
 * The aisle with the most items ordered are fresh vegetables, fresh fruits, and
-packages vegetables fruits.
+packaged vegetables fruits.
 
 * A table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice 
 Cream are ordered each day:
