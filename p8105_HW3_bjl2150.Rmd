@@ -33,9 +33,11 @@ unique(brfss$response)
 brfss %>%
   mutate(response_levels = forcats::fct_relevel(response, c("Excellent", 
                                                             "Very good", "Good",
-                                                            "Fair", "Poor"))) 
+                                                            "Fair", "Poor")))
+```
 
-
+### Question 1.1
+```{r}
 #Wrangling dataframe to find the which states were observed at 7 locations
 brfss_2002 = brfss %>%
   filter(year == 2002) %>%
@@ -48,11 +50,11 @@ brfss_2002 = brfss %>%
 
 Conecticut, Florida and North Carolina are the states which were observed at 
 7 locations  
-  
-## Question 2: Making of Spaghetti Plot
 
-The following code was used to make the spaghetti plot showing the number of 
-locations in each state from 2002 to 2012.
+  
+## Question 1.2: Making of Spaghetti Plot
+
+
 ```{r}
 library(ggridges)
 
@@ -69,11 +71,20 @@ brfss_spaghetti = brfss %>%
 
 # Calling of the datset in order to show the plot.
 brfss_spaghetti
+
 ```
+In the above code chunk, library(ggridges) was loaded in order for plot to be 
+properly displayed. The unique function was used to identify the unique years 
+that are included wihtin the dataset.
+In making the spaghetti plot, data was first grouped by locationabbr and year 
+columns. The distinct function was then used on locationdesc to get the 
+specific locations within each state. The summarize was used to obtain the 
+numbers of locations within esch state. A spaghetti plot was then used to 
+show the number of locations in each state from 2002 through 2010.
 
-### Question 3: Making of Table
+### Question 1.3: Making of Table
 ```{r}
-
+# Using filter and spread functions to obtain the proportion of "Excellent" responses
 brfss_table_1 = brfss %>%
     filter(locationabbr == "NY", response == "Excellent") %>%
   spread(key = response, value = data_value) %>%
@@ -139,15 +150,26 @@ data(instacart)
 instacart = instacart %>% 
   janitor::clean_names()
 
-# Used dim function to het the size of the dataset
+# Used dim function to get the size of the dataset
 dim(instacart)
 ```
+
+### Code chunk summary
+
+The instacart dataset was imported into R. The dataset was then read into Rstudio 
+and called so that it was recognized by the golabl environment. The 'instacart'
+data was then cleaned using the janitor function. 
+
+### Short Description of dataset
+
 This dataset is from the delivery service Instacart. It shows observations ranging
 from proudct ID number and the hour of the day that a product was ordered to the 
 product name and what aisle and department said product can be found in.
 
-This dataset has 15 columns and 1,384,617 rows.
+Using the dim function, this dataset has 15 columns and 1,384,617 rows.
 
+
+## Question 2.1
 ```{r}
 library(tidyverse)
 
