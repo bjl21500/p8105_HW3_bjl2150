@@ -90,7 +90,7 @@ brfss_table_1 = brfss %>%
   spread(key = response, value = data_value) %>%
   filter(year %in% c("2002", "2006", "2010")) 
 
-# Making of the table to show means and standard deveiations
+# Making of the table to show means and standard deviations
 brfss_table_1 %>%
   group_by(year) %>%
   summarize(mean_excellent = mean(Excellent),
@@ -184,23 +184,48 @@ instacart_1B = instacart %>%
   select(product_name, aisle) %>% 
   count(aisle) %>% 
   arrange(desc(n))
+```
+In the first part of Question 1, the number of ailses was determined by selecting
+the aisle column specifically, and then using the distinct function to determine 
+the distinct aisles present in the dataset. The count function was then used to 
+get a number of distinct aisles present in the dataset.
 
-# Problem 2 - Making of plot
+In the second part of the question, the columns product_name and aisle were
+specfically selected. The count function was then used on the aisle column in 
+order to get how many products are ordered per aisle. Then the arranged fucntion
+was utilized to get which aisles had the largest amount of products order from 
+them in descending order.
 
-# Problem 3 - Making table of most popular items
+## Problem 2 - Making of plot
+```{r}
+
+```
+
+## Problem 3 - Making table of most popular items
+
+```{r}
 
 instacart_3B = instacart %>%
   select(aisle, product_name) %>% 
   group_by(aisle) %>%
   count(product_name) %>%
-  arrange(desc(n)) %>%
+  
   filter(aisle %in% c("baking ingredients", "dog food care", 
-                      "packaged vegetables fruits"))  
+                      "packaged vegetables fruits")) %>% 
+  arrange(desc(n), .by_group = TRUE ) %>%
+  filter(product_name %in% c("Light Brown Sugar", "Snack Sticks Chicken & Rice Recipe Dog Treats",
+                             "Organic Baby Spinach")) %>%
+    knitr::kable(digits = 1)
+ 
+# Called the dataset to be in the golabl environment
+instacart_3B
+```
 
   
 
   
-# Problem 4 - Making table of mean hour of day for Pink Lady and Coffee Ice Cream
+## Problem 4 - Making table of mean hour of day for Pink Lady Apples and Coffee Ice Cream
+```{r}
 
 instacart_4 = instacart %>%
     select(order_hour_of_day, product_name, order_dow) %>%
@@ -210,13 +235,25 @@ instacart_4 = instacart %>%
     spread(key = order_dow, value = mean_hour) %>% 
     knitr::kable(digits = 1)
 ```
+To determine the mean hour of the day that Pink Lady Apples and Coffee Ice Cream 
+ordered, the select funtion was used to specifically select columns 
+"order_hour_of_day", "product_name", and "order_dow". The filter function was 
+then used to specify the observations for Pink Lady Apples and Coffee Ice Cream.
+The dataset was then grouped by "order_dow" and "product_name" and then the 
+"mean_hour" caluclated by takin he mean of "order_hout_of_day", while removing 
+missing variables. The spread function was used to spread the "order_dow" from 
+one column to multiple columns to reflect the days of the week. The value for 
+this column was the previously calculated mean_hour values. knits::kable was
+then used to create a table out of this dataset.
 
-There are 134 aisles in the instacart dataset.
+## Problem 2 Answers
 
-The aisle with the most items ordered are fresh vegetables, fresh fruits, and
+* There are 134 aisles in the instacart dataset.
+
+* The aisle with the most items ordered are fresh vegetables, fresh fruits, and
 packages vegetables fruits.
 
-A table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice 
+* A table showing the mean hour of the day at which Pink Lady Apples and Coffee Ice 
 Cream are ordered each day:
 `r instacart_4`
 
