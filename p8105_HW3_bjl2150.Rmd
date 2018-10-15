@@ -56,14 +56,21 @@ locations in each state from 2002 to 2012.
 ```{r}
 library(ggridges)
 
+# Wanted to see the unique year observations within the dataset
 unique(brfss_smart2010$Year)
 
+# Making of the spaghetti plot
 brfss_spaghetti = brfss %>%
   group_by(locationabbr, year) %>%
   distinct(locationdesc) %>%
   summarize(location_numbers = n()) %>%
   ggplot(aes(x = year, y = location_numbers, color = locationabbr)) + 
-  geom_line()
+  geom_line() 
+
+# Calling of the datset in order to show the plot.
+brfss_spaghetti
+
+
 ```
 
 ### Question 3: Making of Table
