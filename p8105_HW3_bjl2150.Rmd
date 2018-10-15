@@ -83,9 +83,17 @@ brfss_table_1 %>%
 
 ```{r}
 brfss_4 = brfss %>%
-  select(year, locationabbr, data_value, response) %>%
-  group_by(response, locationabbr) %>%
+  mutate(response_levels = forcats::fct_relevel(response, c("Excellent",  "Very good", "Good", "Fair", "Poor"))) %>%
+  select(year, locationabbr, data_value, response_levels) %>%
+  group_by(response_levels, locationabbr, year) %>%
   summarize(avg_response = mean(data_value))
+
+brfss_4 %>%
+    ggplot(aes(x = year, y = avg_response, group = year, color = response_levels)) +
+  geom_boxplot() + 
+  facet_grid(~response_levels) + 
+  viridis::scale_fill_viridis(discrete = TRUE)
+
 ```
 
 
@@ -133,6 +141,13 @@ instacart_1B = instacart %>%
 
 # Problem 3 - Making table of most popular items
 
+instacart_3B = instacart %>%
+  select(aisle, product_name) %>% 
+  group_by(aisle) %>%
+  count(product_name) %>%
+  arrange(desc(n)) %>%
+  filter(aisle %in% c("baking ingredients", "dog food care", 
+                      "packaged vegetables fruits"))  
 
   
 
