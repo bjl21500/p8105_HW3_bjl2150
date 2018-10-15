@@ -32,7 +32,7 @@ unique(brfss$response)
 # Ordering of the responses from "Excellent"" to "Poor"
 brfss %>%
   mutate(response_levels = forcats::fct_relevel(response, c("Excellent", 
-                                                            "Very Good", "Good",
+                                                            "Very good", "Good",
                                                             "Fair", "Poor"))) 
 
 
@@ -46,10 +46,13 @@ brfss_2002 = brfss %>%
   filter(n == 7)
 ```
 
-Coneecticut, Florida and North Carolina are the states which were observed at 
+Conecticut, Florida and North Carolina are the states which were observed at 
 7 locations  
   
 ## Question 2: Making of Spaghetti Plot
+
+The following code was used to make the spaghetti plot showing the number of 
+locations in each state from 2002 to 2012.
 ```{r}
 library(ggridges)
 
@@ -65,7 +68,7 @@ brfss_spaghetti = brfss %>%
 
 ### Question 3: Making of Table
 ```{r}
-# The correct code chunk below
+
 brfss_table_1 = brfss %>%
     filter(locationabbr == "NY", response == "Excellent") %>%
   spread(key = response, value = data_value) %>%
