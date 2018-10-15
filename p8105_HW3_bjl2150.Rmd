@@ -69,8 +69,6 @@ brfss_spaghetti = brfss %>%
 
 # Calling of the datset in order to show the plot.
 brfss_spaghetti
-
-
 ```
 
 ### Question 3: Making of Table
@@ -87,13 +85,16 @@ brfss_table_1 %>%
   summarize(mean_excellent = mean(Excellent),
             sd_excellent = sd(Excellent)) %>%
    knitr::kable(digits = 1)
+ 
 ```
 
 ### Question 4
 
 ```{r}
 brfss_4 = brfss %>%
-  mutate(response_levels = forcats::fct_relevel(response, c("Excellent",  "Very good", "Good", "Fair", "Poor"))) %>%
+  mutate(response_levels = forcats::fct_relevel(response, c("Excellent",  
+                                                            "Very good", "Good", 
+                                                            "Fair", "Poor"))) %>%
   select(year, locationabbr, data_value, response_levels) %>%
   group_by(response_levels, locationabbr, year) %>%
   summarize(avg_response = mean(data_value))
@@ -102,10 +103,25 @@ brfss_4 %>%
     ggplot(aes(x = year, y = avg_response, group = year, color = response_levels)) +
   geom_boxplot() + 
   facet_grid(~response_levels) + 
-  viridis::scale_fill_viridis(discrete = TRUE)
+  viridis::scale_fill_viridis(discrete = TRUE) %>%
+   labs(
+    title = "Average Proportion of Each Response Category",
+    x = "Year",
+    y = "Average Proportion",
+    caption = "Data from brfss package"
+  )
 
 ```
 
+In the following code chunk, the brfss_4 dataframe was created from the modified
+brfss dataset. The response levels were releveled into a new variable 
+'response_levels which was then specifically selected along with the columns 'year', 
+'locationabbr', and 'data_value'. The average response was caluclated taking the 
+mean of 'data_value'. 
+
+A separate code was used to create the 5-panel boxplot for all response_levels 
+for each year and state. Additonally, title name, labelled X- and Y- axes, and 
+caption were included in the plot.
 
 # Problem 2
 ## Instacart dataset
