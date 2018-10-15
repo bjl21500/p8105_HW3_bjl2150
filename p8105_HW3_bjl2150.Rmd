@@ -1,7 +1,7 @@
 ---
 title: "p8105_HW3_bjl2150"
 author: "Briana Lettsome"
-date: "October 10, 2018"
+date: "October 15, 2018"
 output: github_document
 ---
 
@@ -182,8 +182,19 @@ such as precipiation or snowfall (mm), from the various weather stations.
 
 ## Problem 3.1
 ```{r}
+# Cleaning and separating 'date' into 'year', 'month', and 'day'. 
+# Then selected "snow"
+
 ny_noaa_1 = ny_noaa %>%
   janitor::clean_names() %>%
-  separate(date, into = c("year", "month", "day"), sep = "-")
+  separate(date, into = c("year", "month", "day"), sep = "-") %>%
+  select(snow)
+
+# Used the sort function in order to determine the most commonly observed valuy  
+  sort(table(ny_noaa_1$snow), decreasing = TRUE) %>% View()
 ```
 
+The most commonly observed value is 0 mm because, in the state of NY, it does not 
+snow for more than half of the year (i.e. it snows for 4 to 5 months of the year).
+Based on this, 0 mm of snow should be the most frequent observations. The second
+and third commonly observed values are 25 and 13 mm as. 
